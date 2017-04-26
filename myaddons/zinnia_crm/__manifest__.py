@@ -46,6 +46,8 @@
         'views/progress.xml',
         'views/maketing_channel.xml',
         'views/agency.xml',
+        'views/sms_setting.xml',
+        'views/reminder.xml',
 
     ],
     # only loaded in demonstration mode

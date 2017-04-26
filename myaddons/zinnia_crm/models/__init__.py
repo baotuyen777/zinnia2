@@ -21,3 +21,5 @@ from . import service_type
 from . import call_conduct
 from . import progress
 from . import maketing_channel
+from . import sms_setting
+from . import reminder
