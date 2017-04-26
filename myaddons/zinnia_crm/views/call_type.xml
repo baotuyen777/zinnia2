@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="call_type_action">
+            <field name="name">call type</field>
+            <field name="res_model">crm.call_type</field>
+        </record>
+
+        <record model="ir.ui.view" id="call_type_tree_view">
+            <field name="name">Call type</field>
+            <field name="model">crm.call_type</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                   <field name="name"/>
+                    <field name="self_team_id"/>
+                </tree>
+            </field>
+        </record>
+        <!--<record model="ir.ui.view" id="call_type_form">-->
+            <!--<field name="name">Call_type</field>-->
+            <!--<field name="model">crm.call_type</field>-->
+            <!--<field name="view_type">form</field>-->
+            <!--<field name="view_mode">form</field>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<form editable="top">-->
+                    <!--<field name="name"/>-->
+                    <!--<field name="self_team_id"/>-->
+                <!--</form>-->
+            <!--</field>-->
+        <!--</record>-->
+        <menuitem name="Call Type" id="menu_call_type" action="call_type_action" parent="menu_heading_config_param"/>
+
+    </data>
+</odoo>

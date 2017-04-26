@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="call_conduct_action">
+            <field name="name">call conduct</field>
+            <field name="res_model">crm.call_conduct</field>
+        </record>
+
+        <record model="ir.ui.view" id="call_conduct_tree_view">
+            <field name="name">Conduct_Conduct</field>
+            <field name="model">crm.call_conduct</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="remkt"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem name="Conduct Conduct" id="menu_call_conduct" action="call_conduct_action" parent="menu_heading_config_param"/>
+
+    </data>
+</odoo>
