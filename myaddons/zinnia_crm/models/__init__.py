@@ -23,3 +23,4 @@ from . import progress
 from . import maketing_channel
 from . import sms_setting
 from . import reminder
+from . import branch

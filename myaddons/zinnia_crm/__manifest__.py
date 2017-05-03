@@ -48,6 +48,7 @@
         'views/agency.xml',
         'views/sms_setting.xml',
         'views/reminder.xml',
+        'views/branch.xml',
 
     ],
     # only loaded in demonstration mode

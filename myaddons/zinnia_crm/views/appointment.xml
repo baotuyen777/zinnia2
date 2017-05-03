@@ -26,20 +26,21 @@
                                 <field name="phone"/>
                                 <field name="date"/>
                                 <field name="duration"/>
-                                <field name="purpose_id"/>
-                                <field name="service_type_id"/>
-                                <field name="contact_id"/>
-                                <field name="conduct_id"/>
-                                <field name="product_id"/>
+                                <field name="purpose_id" widget="selection"/>
+                                <field name="service_type_id" widget="selection"/>
+                                <field name="contact_id" widget="selection"/>
+                                <field name="conduct_id" widget="selection"/>
+                                <field name="product_id" widget="selection"/>
 
                             </group>
                             <group>
-                                <field name="call_type"/>
-                                <field name="agency_id"/>
-                                <field name="maketing_channel_id"/>
+                                <field name="employee_id" widget="selection" domain="[('is_company','=',False)]"/>
+                                <field name="call_type_id"  widget="selection"/>
+                                <field name="agency_id" widget="selection"/>
+                                <field name="maketing_channel_id" widget="selection"/>
                                 <field name="phone_number"/>
-                                <field name="branch"/>
-                                <field name="request_id"/>
+                                <field name="branch_id" widget="selection"/>
+                                <field name="request_id" widget="selection"/>
                             </group>
                         </group>
 
