@@ -1,0 +1,90 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2014 BVTC (<http://benhvienthucuc.vn>). All Rights Reserved
+#    $Id$
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+from openerp.osv import osv, fields
+from openerp import pooler
+
+class crm_phonecall(osv.osv):
+    _inherit = 'crm.phonecall'
+    
+    def _get_selection(self, cr, uid, context=None):
+        v=[]
+        service_ids = self.pool.get('crm.service.type').search(cr,uid,[],context=context)
+        for id in service_ids:
+            service = self.pool.get('crm.service.type').browse(cr,uid,id,context=context)
+            vs=[]
+            vs.append(service.name)
+            vs.append(service.description)
+            v.append(vs)
+        
+        return v
+    
+    def _get_channel_selection(self, cr, uid, context=None):
+        v=[]
+        service_ids = self.pool.get('crm.channel').search(cr,uid,[],context=context)
+        for id in service_ids:
+            channel = self.pool.get('crm.channel').browse(cr,uid,id,context=context)
+            vs=[]
+            vs.append(channel.shortname)
+            vs.append(channel.channel_name)
+            v.append(vs)
+        
+        return v
+    
+    def _get_status_selection(self, cr, uid, context=None):
+        v=[]
+        status_ids = self.pool.get('crm.callstatus').search(cr,uid,[],context=context)
+        for id in status_ids:
+            status = self.pool.get('crm.callstatus').browse(cr,uid,id,context=context)
+            vs=[]
+            vs.append(status.status_code)
+            vs.append(status.channel_name)
+            v.append(vs)
+        
+        return v
+    
+    _columns = {
+        'result_status': fields.selection(_get_status_selection,'Result Status'),
+        'channel': fields.selection(_get_channel_selection,'Channels'),
+        'service': fields.selection(_get_selection,string='Consult Type'),
+    }           
+crm_phonecall()
+
+class call_status(osv.osv):
+    _name = 'crm.callstatus'
+    
+    _columns = {
+        'status_code': fields.char('Status Code', size=10),
+        'status': fields.char('Status', size =50),
+    }
+    
+    _defaults = {
+        'status_code':'call',
+        'status':'Call In'
+    }
+    
+    _sql_constraints = [
+        ('status_key', 'UNIQUE(status_code)', 'Status code has to be unique !')
+        ]
+call_status()
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

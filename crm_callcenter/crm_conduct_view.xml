@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="result_type_form">
+        <field name="name">Conducted Result Form</field>
+        <field name="model">crm.conduct</field>
+        <field name="arch" type="xml">
+            <form string="Conducted Result Definition" version="7.0">
+				<group col="4">  
+					<field name="conduct_code"/>
+					<field name="conduct"/>
+				</group>
+            </form>
+        </field>
+    </record>
+	
+	<record model="ir.ui.view" id="conduct_result_tree">
+		<field name="name">Consultant Result Definition Tree</field>
+		<field name="model">crm.conduct</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Consultant Result Definition">
+				<field name="conduct_code"/>
+				<field name="conduct"/>
+			</tree>
+		</field>
+	</record>
+	<!--
+	<record id="view_crm_callcenter_conduct_filter" model="ir.ui.view">
+        <field name="name">CRM - Phone Call Center Search</field>
+        <field name="model">crm.phonecall</field>
+		<field name="inherit_id" ref="view_crm_callcenter_phonecalls_filter"/>
+        <field name="arch" type="xml">
+			
+        </field>
+    </record>
+	-->
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_conduct_result">
+      <field name="name">Conducted Result</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.conduct</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="conduct_result_tree"/>
+    </record>
+	
+</data>
+</openerp>

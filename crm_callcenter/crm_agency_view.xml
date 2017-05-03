@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="agency_form">
+		<field name="name">Agency_Form_View</field>
+		<field name="model">crm.agency</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Agency" version="7.0">
+				<sheet>
+					<group col="4">     
+						<field name="agency_code" />
+						<field name="agency_name" />
+						<field name="dob" />
+						<field name="address" />
+						<field name="phone" />
+						<field name="email" />
+					</group>
+					<group col="4" string="Bank Info" >
+						<field name="bank_account" />
+						<field name="bank_name" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="agency_tree">
+		<field name="name">Agency_Tree_View</field>
+		<field name="model">crm.agency</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="List of Agency">
+				<field name="agency_code"/>
+				<field name="agency_name"/>
+				<field name="phone" />
+				<field name="email" />
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_crm_agency">
+      <field name="name">Agency Informations</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.agency</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="agency_tree"/>
+    </record>
+</data>
+</openerp>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="progress_type_form">
+        <field name="name">Progress State Form</field>
+        <field name="model">crm.progress</field>
+        <field name="arch" type="xml">
+            <form string="Progress State Definition" version="7.0">
+				<group col="4">  
+					<field name="progress_code"/>
+					<field name="progress_name"/>
+				</group>
+            </form>
+        </field>
+    </record>
+	
+	<record model="ir.ui.view" id="progress_type_tree">
+		<field name="name">Progress State Definition Tree</field>
+		<field name="model">crm.progress</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Progress State Definition">
+				<field name="progress_code"/>
+				<field name="progress_name"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_progress_state">
+      <field name="name">Progress State</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.progress</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="progress_type_tree"/>
+    </record>
+	
+</data>
+</openerp>

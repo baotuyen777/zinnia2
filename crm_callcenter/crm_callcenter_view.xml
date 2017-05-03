@@ -1,0 +1,571 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<!-- Change Trans -->
+	<record model="res.groups" id="group_enable_change_trans">
+           <field name="name">Enable change transaction</field>
+    </record>
+	
+	<record model="ir.ui.view" id="bsm_trans_change_form_view">
+            <field name="name">Change Transaction</field>
+            <field name="model">change.trans</field>
+            <field name="arch" type="xml">
+                <form string="Change Transactions" version="7.0">
+					<group col="4">
+						<field name="new_number" on_change="on_change_new_number(new_number)"/>
+						<field name="new_name" readonly="1" />
+						<field name="phones" readonly="1" />
+						<field name="current_trans" invisible="1" />
+						<field name="partner_id" invisible="1" />
+					</group>
+					<footer>
+						<button class="oe_highlight" name="change_trans" string="Thay đổi" type="object" />
+						<button icon="gtk-stop" special="cancel" string="Hủy bỏ" class="oe_link"/>
+					</footer>
+                </form>
+            </field>
+        </record>
+		
+		<record id="action_trans_change" model="ir.actions.act_window">
+            <field name="name">Change Transaction</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">change.trans</field>
+			<field name="context">{'default_current_trans' : active_id}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+			<field name="target">new</field>
+			<field name="nodestroy">True</field>
+			<field name="view_id" ref="bsm_trans_change_form_view"/>			
+		</record>
+		
+    <!-- Phonecalls Form View With Call Center -->
+    <record model="ir.ui.view" id="crm_callcenter_form_view">
+        <field name="name">CRM - Call Center Form</field>
+        <field name="model">crm.phonecall</field>
+		<field name="inherit_id" ref="crm.crm_case_phone_form_view"/>
+        <field name="arch" type="xml">
+			<xpath expr="/form/header" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr="/form/sheet/div[@class='oe_right']" position="replace">
+				<div class="oe_right">
+					<label for="call_count" />
+					<field name="call_count" attrs="{'readonly':1}" />	
+					<button class="oe_highlight" name="%(action_trans_change)d" string="Gộp giao dịch" type="action" groups="crm_callcenter.group_enable_change_trans" />
+				</div>
+			</xpath>
+
+            <field name="user_id" position="replace">
+					<field name="user_id" attrs="{'readonly':1}" />
+				</field>
+			<field name="categ_id" position="replace" />
+			<field name="partner_phone" position="replace" />
+			<field name="partner_id" position="replace" />
+			<field name="priority" position="replace" />
+			<field name="section_id" position="replace" >
+				<field name="categ_id" options="{'create':False, 'create_edit': False,'m2o_dialog' : False,'no_open':True}" domain="[('object_id.model', '=', 'crm.phonecall')]" on_change="on_change_categ_id(categ_id)"/>
+			</field>
+			<field name="categ_id" position="after">			
+				<field name="result_status" on_change="onchange_result_status(result_status)"/>
+				<field name="agency" options="{'create':False, 'create_edit': False,'m2o_dialog' : False,'no_open':True}"/>
+				<field name="service" />				
+				<field name="channel"/>
+				<field name="partner_id" domain="[('customer','=',1)]" on_change="onchange_partner_id(partner_id)" />
+				<field name="partner_phone"/>								
+			</field>
+			<field name="opportunity_id" position="replace" >
+				<field name="opportunity_id" on_change="on_change_opportunity(opportunity_id)" invisible="1" />
+				<field name="progress_status" context="{'default_progress_status': 'KTL'}" />
+				<field name="conduct"/>
+				<field name="request_type"/>
+			</field>
+
+            <field name="description" position="replace" >
+				<field name="has_meeting"/> <label for="has_meeting" />
+				<field name="has_agency" invisible="1"/>
+                <notebook colspan="4">
+                        <page string="Appointment Extra Info" attrs="{'invisible': [('has_meeting','=',False)]}"  autofocus="autofocus" >
+                            <group col="4">
+                                <field name="brief" />
+                                <field name="staffs" widget="many2many_tags" />
+								<field name="sms_status" />
+								<field name="doctors" widget="many2many_tags" />                              
+                            </group>
+
+                        </page>
+                        <page string="Description" >
+                            <field name="description" />
+                        </page>
+						<page string="Logged History">
+                            <field colspan="4" name="logs" nolabel="1" context=" {'default_phonecall_id':active_id}">
+								<tree string="Notes" editable="top">
+									<field name='date' />
+									<field name='user' readonly='1' />
+									<field name='phonecall_id' invisible='1'/>
+									<field name='description'/>
+								</tree>
+							</field>
+                        </page>
+                </notebook>
+			</field>
+        </field>
+    </record>
+	
+	<record model="ir.ui.view" id="crm_callcenter_inbound_tree_view">
+        <field name="name">CRM - Logged Phone Call Center Tree</field>
+        <field name="model">crm.phonecall</field>
+		<field name="inherit_id" ref="crm.crm_case_inbound_phone_tree_view"/>
+        <field name="arch" type="xml">
+			<field name="date" position="before">
+				<field name="create_date"/>
+			</field>
+            <field name="partner_phone" position="replace">			
+				<field name="service"/>
+				<field name="result_status"/>
+				<field name="description"/>
+				<field name="conduct"/>
+				<field name="request_type"/>				
+				<field name="call_count"/>
+
+			</field>
+			<field name="partner_id" position="after">
+				<field name="partner_mobile"/>			
+			</field>
+			<field name="categ_id" position="after">
+				<field name="staffs"/>
+				<field name="doctors"/>
+				<field name="channel"/>
+			</field>
+        </field>
+    </record>
+
+	<record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+
+				<xpath expr="/form/sheet//field[@name='website']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="/form/sheet//field[@name='title']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@string='Sales &amp; Purchases']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@string='Accounting']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@name='page_history']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/group/group//div[@class='address_format']/field[@name='city']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				<xpath expr="/form/sheet/group/group//div[@class='address_format']/field[@name='state_id']" position="replace">
+					<field name="state_id" class="oe_no_button" placeholder="City" style="width: 37%%" options='{"no_open": True}' on_change="onchange_state(state_id)" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+				</xpath>
+				<xpath expr="/form/sheet/group/group//div[@class='address_format']/field[@name='zip']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+            </field>
+	</record>
+	
+	<record id="action_new_logged_call" model="ir.actions.act_window">
+		<field name="name">Create Transaction</field>
+		<field name="res_model">crm.phonecall</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="crm_callcenter.crm_callcenter_form_view"/>
+		<field name="context" eval="'{\'default_partner_id\':active_id,\'default_state\':\'done\',\'default_duration\':1,\'default_result_status\':\'TV\'}'"/>
+		<field name="target">current</field> <!-- default is current -->
+	</record>
+	
+	<record model="ir.ui.view" id="crm_callcenter_schedule_phone_tree_view">
+        <field name="name">CRM - Phone Calls Center Tree</field>
+        <field name="model">crm.phonecall</field>
+		<field name="inherit_id" ref="crm.crm_case_phone_tree_view"/>
+        <field name="arch" type="xml">
+			<xpath expr="/tree/button[@name='action_button_convert2opportunity']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<xpath expr="/tree/field[@name='state']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+			<field name="date" position="before">
+				<field name="create_date"/>
+			</field>
+			<field name="partner_phone" position="replace">
+				<field name="service"/>
+				<field name="result_status"/>
+				<field name="description"/>
+				<field name="conduct"/>		
+				<field name="request_type"/>
+				<field name="call_count"/>
+
+			</field>
+			<field name="partner_id" position="after">
+				<field name="partner_mobile"/>				
+			</field>
+			<field name="categ_id" position="after">
+				<field name="staffs"/>
+				<field name="doctors"/>
+				<field name="channel"/>
+			</field>
+        </field>
+    </record>
+	
+	<record id="action_view_appointment_action" model="ir.actions.act_window">
+		<field name="name">Appointments</field>
+		<field name="res_model">crm.phonecall</field>
+		<field name="view_mode">calendar,tree,form</field>
+		<field name="view_id" ref="crm_callcenter_schedule_phone_tree_view"/>
+		<field name="domain">[('result_status','in',['booking','DLTV','DLSEOTV','DLSEOTH','LT','TK']),('service','!=','BV'),('service','!=','SPA'),('service','!=','DVK'),('service','!=','NA')]</field>
+        <field name="context" eval="'{\'default_state\':\'done\',\'default_duration\':1,\'default_result_status\':\'booking\'}'"/>
+	</record>
+	
+	<record id="action_new_appointment" model="ir.actions.act_window">
+		<field name="name">Create Appointment</field>
+		<field name="res_model">crm.phonecall</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="crm_callcenter.crm_callcenter_form_view"/>
+		<field name="context" eval="'{\'default_partner_id\':active_id,\'default_state\':\'done\',\'default_duration\':1,\'default_result_status\':\'booking\'}'"/>
+		<field name="target">current</field> <!-- default is current -->
+	</record>
+	
+	 <record model="ir.ui.view" id="res_partner_view_callcenter_buttons">
+            <field name="name">res.partner.call.buttons</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="crm.res_partner_view_buttons" />
+			<field name="groups_id" eval="[(6,0,[ref('group_call_center_user'),ref('group_call_center_manager'),ref('group_receptionist_manager')])]" />
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='buttons']" position="inside">
+					<button type="action" string="Profiles"
+                        name="%(crm.crm_case_categ_phone_incoming0)d"
+                        context="{'search_default_partner_id': active_id, 'default_duration': 1.0}" />
+                    <button type="action"
+                        string="Create Call"
+                        name="%(action_new_logged_call)d"/>
+					<button type="action"
+                        string="Create Appointment"
+                        name="%(action_new_appointment)d"/>
+                </xpath>
+            </field>
+        </record>
+
+
+	<record id="view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.callcenter.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="point_of_sale.view_partner_property_form"/>
+			<field name="group">group_call_center_user</field>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Point of Sale']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+				
+            </field>
+        </record>
+	
+	<!-- Chỗ này lỗi -->
+	<record id="view_partner_crm_tree" model="ir.ui.view">
+            <field name="name">res.partner.callcenter.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                	<field name="name" position="after">
+					<field name="birthdate" />
+					<field name="partner_gender" />
+				</field>
+
+				<field name="country" position="after">
+					<field name="create_date" />
+				</field>
+				<!--<field name="city" position="replace">
+					<field name="state_id" />
+				</field>-->
+            </field>
+        </record>
+	
+	<record model="ir.actions.act_window" id="crm_callcenter_phone_outgoing0">
+        <field name="name">Scheduled Calls</field>
+        <field name="res_model">crm.phonecall</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,calendar,form</field>
+        <field name="view_id" ref="crm_callcenter_schedule_phone_tree_view"/>
+        <field name="domain">[('state','!=','done')]</field>
+        <field name="context" eval="'{\'default_state\':\'open\'}'"/>
+        <field name="search_view_id" ref="crm.view_crm_case_phonecalls_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to schedule a call
+          </p><p>
+            OpenERP allows you to easily define all the calls to be done
+            by your sales team and follow up based on their summary.
+          </p><p>
+            You can use the import feature to massively import a new list of
+            prospects to qualify.
+          </p>
+        </field>
+    </record>
+	
+	<record id="action_partner_form" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+			<field name="inherit_id" ref="base.action_partner_form"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+			<field name="view_id" ref="base.res_partner_kanban_view"/>
+			<field name="context">{"search_default_customer":1}</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        </record>
+
+	<!-- Phonecalls Search View  -->
+    <record id="view_crm_callcenter_phonecalls_filter" model="ir.ui.view">
+        <field name="name">CRM - Phone Call Center Search</field>
+        <field name="model">crm.phonecall</field>
+		<field name="inherit_id" ref="crm.view_crm_case_phonecalls_filter"/>
+        <field name="arch" type="xml">
+			<xpath expr="/search/field[@name='partner_mobile']" position="after">			
+				<field name="date" string="Appoinment - From Date" filter_domain="[('date','&gt;=',self)]" />
+				<field name="date" string="Appoinment - To Date" filter_domain="[('date','&lt;=',self)]" />
+				<field name="create_date" string="Create - From Date" filter_domain="[('create_date','&gt;=',self)]" />
+				<field name="create_date" string="Create - To Date" filter_domain="[('create_date','&lt;=',self)]" />
+				<field name="conduct" />
+				<field name="request_type"/>
+				<field name="service" />
+				<field name="result_status" />
+				<field name="agency" />
+				<field name="progress_status" />
+				<field name="staffs" />
+				<field name="doctors" />
+			</xpath>
+			<xpath expr="/search/field[@name='state']" position="after">
+				<separator/>			
+				<filter icon="terp-go-day" string="Current Date" help="Appoinment Current Date" domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-%%d 00:00')),('date','&lt;=',context_today().strftime('%%Y-%%m-%%d 23:59'))]" />
+				<!--
+				<separator/>
+				<filter icon="terp-go-week"
+                            string="Current Week"
+                            domain="[('date','&gt;=', (context_today() - relativedelta(weekday=-1)).strftime('%%Y-%%m-%%d 23:59')),('date','&lt;=',(context_today() + relativedelta(weeks=-1,weekday=0)).strftime('%%Y-%%m-%%d 00:00'))]"
+                            help="Appoinment Current Week"/> -->
+				<separator/>
+				<filter icon="terp-go-month" string="Current Month" domain="[('date','&lt;=',(context_today()+relativedelta(day=31)).strftime('%%Y-%%m-%%d 23:59')),('date','&gt;=',(context_today()-relativedelta(day=1)).strftime('%%Y-%%m-%%d 00:00'))]"
+					help="Appoinment Current Month" />
+				<separator/>
+				<filter icon="terp-go-year" string="Current Year" domain="[('date','&lt;=', time.strftime('%%Y-12-31 23:59')),('date','&gt;=',time.strftime('%%Y-01-01 00:00'))]"
+					help="Appoinment Current Year" />
+				
+				
+			</xpath>
+			
+			<xpath expr="/search/group[@string='Group By...']" position="inside">
+				<filter string="Category" domain="[]" context="{'group_by':'categ_id'}"/>
+				<filter string="Type" domain="[]" context="{'group_by':'service'}" help="Consultant Result Types"/>
+				<filter string="Purpose" domain="[]" context="{'group_by':'result_status'}"/>
+				<filter string="Conducted Result" domain="[]" context="{'group_by':'conduct'}"/>
+				<filter string="Yêu cầu" domain="[]" context="{'group_by':'request_type'}"/>
+				<filter string="Progress State" domain="[]" context="{'group_by':'progress_status'}"/>
+				<filter string="Marketing Channels" domain="[]" context="{'group_by':'channel'}"/>
+				<filter string="Agency" domain="[]" context="{'group_by':'agency'}"/>
+				<filter string="City/Province" domain="[]" context="{'group_by':'city'}"/>
+				<filter string="Partner Mobile" domain="[]" context="{'group_by':'partner_mobile'}"/>
+			</xpath>
+			
+			<xpath expr="/search/group[@string='Group By...']/filter[@string='Partner']" position="before">
+				<filter icon="terp-go-day" string="Current Date" help="Appoinment Current Date" domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-%%d 00:00')),('date','&lt;=',context_today().strftime('%%Y-%%m-%%d 23:59'))]" context="{'group_by':'date'}" />
+				<filter icon="terp-go-month" string="Current Month" domain="[('date','&lt;=',(context_today()+relativedelta(day=31)).strftime('%%Y-%%m-%%d 23:59')),('date','&gt;=',(context_today()-relativedelta(day=1)).strftime('%%Y-%%m-%%d 00:00'))]" help="Appoinment Current Month" context="{'group_by':'date'}"/>
+				<filter icon="terp-go-year" string="Current Year" domain="[('date','&lt;=', time.strftime('%%Y-12-31 23:59')),('date','&gt;=',time.strftime('%%Y-01-01 00:00'))]"
+					help="Appoinment Current Year" context="{'group_by':'date'}"/>
+			</xpath>
+			
+			<xpath expr="/search/filter[@string='Unassigned Phonecalls']" position="replace"></xpath>
+			<xpath expr="/search/filter[@string='To Do']" position="replace"></xpath>
+			<xpath expr="/search/filter[@string='Phone Calls Assigned to Me or My Team(s)']" position="replace">
+				<filter string="Transaction created to Me or My Team(s)" icon="terp-personal+" domain="['|', ('section_id.user_id','=',uid), ('user_id', '=', uid)]"
+                       help="Transaction created to the current user or with a team having the current user as team leader"/>
+			</xpath>
+        </field>
+    </record>
+
+	<record id="view_crm_partner_filter" model="ir.ui.view">
+        <field name="name">CRM - Search by Receipt Code</field>
+        <field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+			<field name="mobile" position="after">
+				<field name="receipt_code" />
+				<field name="state_id" />
+				<field name="birthdate" string="Birth Date - From Date" filter_domain="[('birthdate','&gt;=',self)]" />
+				<field name="birthdate" string="Birth Date - To Date" filter_domain="[('birthdate','&lt;=',self)]" />
+			</field>
+			<xpath expr="/search/group/filter[@string='Country']" position="before">
+				<filter string="City/Province" domain="[]"  context="{'group_by':'state_id'}" />
+			</xpath>
+
+        </field>
+    </record>
+	
+	<!-- Customize Form Product-->
+	<record id="action_product_form" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree,kanban</field>
+			<field name="context" eval="'{\'default_type\':\'service\'}'"/>			
+    </record>
+	
+	<record id="callcenter_product_normal_form_view" model="ir.ui.view">
+            <field name="name">callcenter.product.form</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <form string="Product" version="7.0">
+                    <sheet>
+                        <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+                        <div class="oe_title">
+                            <div class="oe_edit_only">
+                                <label for="name" string="Product Name"/>
+                            </div>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <label for="categ_id" class="oe_edit_only"/>
+                            <h2><field name="categ_id"/></h2>
+                        </div>
+                        <div class="oe_right oe_button_box" name="buttons">
+                        </div>
+                        <notebook>
+                            <page string="Information">
+                                <group>
+                                    <group>
+                                        <field name="type"/>
+                                        <field name="list_price"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+		
+		<record id="callcenter_product_normal_tree_view" model="ir.ui.view">
+            <field name="name">callcenter.product.form</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+				<tree string="Products">
+                    <field name="name"/>
+                    <field name="categ_id"/>
+                    <field name="type" invisible="1"/>
+                    <field name="lst_price"/>
+                    <field name="price" invisible="not context.get('pricelist',False)"/>
+                    <field name="standard_price" invisible="1"/>
+                </tree>
+			</field>
+        </record>
+			
+	<!-- End Customize -->
+	
+	<record model="ir.actions.act_window.view" id="act_product_tree_view">
+		<field eval="3" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="callcenter_product_normal_tree_view"/>
+		<field name="act_window_id" ref="action_product_form"/>
+	</record>
+	
+	<record model="ir.actions.act_window.view" id="act_product_form_view">
+		<field eval="4" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="callcenter_product_normal_form_view"/>
+		<field name="act_window_id" ref="action_product_form"/>
+	</record>
+	
+	<!-- Customize Product Categories-->
+	
+	<record id="callcenter_product_category_form_view" model="ir.ui.view">
+            <field name="name">callcenter.product.category.form</field>
+            <field name="model">product.category</field>
+            <field name="arch" type="xml">
+				<form string="Product Categories" version="7.0">
+                    <group col="4">
+							<group>
+								<field name="name"/>
+							</group>
+							<group>
+								<field name="parent_id"/>
+							</group>
+						</group>
+                </form>     
+            </field>
+        </record>
+		
+	<record id="callcenter_product_category_tree_view" model="ir.ui.view">
+            <field name="name">callcenter.product.category.tree</field>
+            <field name="model">product.category</field>
+            <field name="arch" type="xml">
+				<tree string="Product Categories">
+                    <field name="name"/>
+					<field name="parent_id"/>
+                </tree>
+			</field>
+        </record>
+	
+	<record id="action_product_category" model="ir.actions.act_window">
+            <field name="name">Products Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>		
+    </record>
+	
+	<record model="ir.actions.act_window.view" id="act_product_category_tree_view">
+		<field eval="1" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="callcenter_product_category_tree_view"/>
+		<field name="act_window_id" ref="action_product_category"/>
+	</record>
+	<!-- End Customize -->
+	
+	<record model="ir.actions.act_window.view" id="act_product_category_form_view">
+		<field eval="2" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="callcenter_product_category_form_view"/>
+		<field name="act_window_id" ref="action_product_category"/>
+	</record>
+		
+	
+	<menuitem id="menu_callcenter_top" name="CRM" groups="group_call_center_user,group_call_center_manager,group_receptionist,group_receptionist_manager" />
+    <menuitem id="menu_callcenter_main_customers" name="Customers" parent="menu_callcenter_top" sequence="1" />
+	<menuitem id="menu_callcenter_customer" parent="menu_callcenter_main_customers" action="action_partner_form" groups="group_call_center_user,group_receptionist"/>
+	<menuitem id="menu_callcenter_customer_2" parent="menu_callcenter_main_customers" action="base.action_partner_form" groups="group_call_center_manager"/>
+
+	<menuitem name="Customer Profile" id="menu_callcenter_case_phone" sequence="2" parent="menu_callcenter_top" groups="group_call_center_user,group_call_center_manager,group_receptionist_manager" />
+
+	<menuitem name="Transaction" id="menu_callcenter_case_phone_inbound"
+        parent="menu_callcenter_case_phone"
+        action="crm.crm_case_categ_phone_incoming0" groups="group_call_center_user,group_call_center_manager,group_receptionist_manager" />
+
+    <menuitem name="Appoinment" id="menu_callcenter_appoinment"
+        parent="menu_callcenter_case_phone"
+        action="action_view_appointment_action" groups="group_call_center_user,group_call_center_manager,group_receptionist_manager" />
+
+	<menuitem name="Products" id="menu_callcenter_product" parent="menu_callcenter_top" groups="group_call_center_manager" sequence="4" />
+	<menuitem name="Product/Service Categories" id="menu_callcenter_product_category" parent="menu_callcenter_product" action="action_product_category" groups="group_call_center_manager" />
+	<menuitem name="Products/Services" id="menu_callcenter_products" parent="menu_callcenter_product" action="action_product_form" groups="group_call_center_manager" />
+
+	<menuitem name="Configuration" id="menu_callcenter_config" parent="menu_callcenter_top" groups="group_call_center_manager" sequence="5" />
+	<menuitem id="phonecall_menu_config" name="Categories" parent="menu_callcenter_config" action="crm.crm_phonecall_categ_action"  sequence="16" groups="group_call_center_manager" />
+	<menuitem id="result_type_menu_config" name="Purpose" parent="menu_callcenter_config" action="action_result_type"  sequence="17" groups="group_call_center_manager" />
+	<menuitem id="service_type_menu_config" name="Transaction Types" parent="menu_callcenter_config" action="action_call_service_type"  sequence="18" groups="group_call_center_manager" />
+	<menuitem id="conduct_menu_config" name="Conducted Result" parent="menu_callcenter_config" action="action_conduct_result"  sequence="19" groups="group_call_center_manager" />
+	<menuitem id="progress_menu_config" name="Progress State" parent="menu_callcenter_config" action="action_progress_state"  sequence="20" groups="group_call_center_manager" />
+	<menuitem id="channel_menu_config" name="Marketing Channel" parent="menu_callcenter_config" action="action_crm_channel"  sequence="21" groups="group_call_center_manager" />
+	<menuitem id="agency_menu_config" name="Agency" parent="menu_callcenter_config" action="action_crm_agency"  sequence="22" groups="group_call_center_manager" />
+	<menuitem id="sms_menu_config" name="SMS Reminder Settings" parent="menu_callcenter_config" action="action_sms_settings"  sequence="23" groups="group_call_center_manager" />
+</data>
+</openerp>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="ir_cron_crm_sms_reminder" model="ir.cron">
+            <field name="name">Send SMS Reminder</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="'crm.phonecall'" name="model"/>
+            <field eval="'_send_sms_reminder'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+		
+		<record model="ir.ui.view" id="crm_reminder_sms_history_view">
+			<field name="name">sms.smsclient.history.tree</field>
+			<field name="model">sms.smsclient.history</field>
+			<field name="inherit_id" ref="smsclient.sms_smsclient_history_tree"/>
+			<field name="arch" type="xml">
+				<field name="user_id" position="replace" />
+				<field name="name" position="replace"/>
+                <field name="gateway_id" position="replace"/>
+				<field name="to" position="before" >
+					<field name="customer" />
+				</field>
+			</field>
+		</record>
+		
+	<!-- Search View -->
+		<record id="view_sms_history_filter" model="ir.ui.view">
+			<field name="name">SMS History Search</field>
+			<field name="model">sms.smsclient.history</field>
+			<field name="arch" type="xml">
+				<search string="SMS History Search" >
+					<field name="to" />
+					<field name="customer" />
+					<field name="date_create" string="Sent Date - From Date" filter_domain="[('date_create','&gt;=',self)]" />
+					<field name="date_create" string="Sent Date - To Date" filter_domain="[('date_create','&lt;=',self)]" />					
+				</search>
+			</field>
+		</record>
+	
+	<menuitem name="SMS Sents" id="menu_sms_sent" parent="crm_callcenter.menu_callcenter_case_phone" sequence="10" action="smsclient.action_sms_smsclient_history_tree" groups="crm_callcenter.group_call_center_manager" />
+    </data>
+</openerp>

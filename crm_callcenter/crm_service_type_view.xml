@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="service_type_form">
+		<field name="name">Transaction Type Form</field>
+		<field name="model">crm.service.type</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Phonecall Result">
+				<group col="4">     
+					<field name="name" />
+					<field name="description" />
+				</group>
+			</form>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="service_type_tree">
+		<field name="name">Transaction Type Tree</field>
+		<field name="model">crm.service.type</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Phonecall Result">
+				<field name="name"/>
+				<field name="description"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_call_service_type">
+      <field name="name">Transaction Type</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.service.type</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="service_type_tree"/>
+    </record>
+	
+
+</data>
+</openerp>

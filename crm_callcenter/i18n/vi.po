@@ -1,0 +1,506 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* crm_callcenter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20140527-231223\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-08 15:09+0000\n"
+"PO-Revision-Date: 2014-08-09 09:25+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: vi\n"
+"X-Generator: Poedit 1.6.7\n"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.service_type_menu_config
+msgid "Transaction Types"
+msgstr "Lĩnh vực quan tâm"
+
+#. module: crm_callcenter
+#: selection:crm.meeting,sms_status:0 selection:crm.phonecall,sms_status:0
+msgid "Not Send"
+msgstr "Chưa gửi"
+
+#. module: crm_callcenter
+#: view:crm.meeting:0
+msgid "Group By..."
+msgstr "Nhóm dữ liệu theo ..."
+
+#. module: crm_callcenter
+#: model:ir.model,name:crm_callcenter.model_crm_conduct
+msgid "crm.conduct"
+msgstr ""
+
+#. module: crm_callcenter
+#: field:crm.smssettings,time_unit:0
+msgid "Time Unit"
+msgstr "Đơn vị thời gian"
+
+#. module: crm_callcenter
+#: sql_constraint:crm.result.type:0
+msgid "Status code has to be unique !"
+msgstr "Mã mục đích không được trùng nhau"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Appoinment Current Date"
+msgstr "Ngày đặt hẹn hôm nay"
+
+#. module: crm_callcenter
+#: code:addons/crm_callcenter/crm_phonecall.py:302
+#, python-format
+msgid "Partner has been <b>created</b>."
+msgstr "Khách hàng <b>đã được tạo</b>."
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Create - To Date"
+msgstr "Ngày tạo - Đến"
+
+#. module: crm_callcenter
+#: model:res.groups,name:crm_callcenter.group_receptionist_manager
+msgid "Receptionists Manager"
+msgstr ""
+
+#. module: crm_callcenter
+#: selection:crm.smssettings,time_unit:0
+msgid "Minute(s)"
+msgstr "phút"
+
+#. module: crm_callcenter
+#: view:crm.smssettings:0
+#: model:ir.actions.act_window,name:crm_callcenter.action_sms_settings
+#: model:ir.model,name:crm_callcenter.model_crm_smssettings
+#: model:ir.ui.menu,name:crm_callcenter.sms_menu_config
+msgid "SMS Reminder Settings"
+msgstr "Thời gian nhắc lịch hẹn qua SMS"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_crm_channel
+msgid "Channel Informations"
+msgstr "Kênh thông tin"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Appoinment - To Date"
+msgstr "Lịch hẹn - Từ"
+
+#. module: crm_callcenter
+#: field:crm.conduct,conduct:0 view:crm.phonecall:0
+#: field:crm.phonecall,conduct:0
+#: model:ir.actions.act_window,name:crm_callcenter.action_conduct_result
+#: model:ir.ui.menu,name:crm_callcenter.conduct_menu_config
+msgid "Conducted Result"
+msgstr "Đánh giá"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_product
+msgid "Products"
+msgstr "Sản phầm"
+
+#. module: crm_callcenter
+#: model:res.groups,name:crm_callcenter.group_receptionist
+msgid "Receptionists"
+msgstr "Lễ tân"
+
+#. module: crm_callcenter
+#: selection:crm.meeting,sms_status:0 selection:crm.phonecall,sms_status:0
+msgid "Cancelled"
+msgstr "Đã hủy"
+
+#. module: crm_callcenter
+#: field:crm.smssettings,reminder_message:0
+msgid "Message Template"
+msgstr "Mẫu tin nhắn"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_new_logged_call
+msgid "Create Transaction"
+msgstr "Tạo giao dịch"
+
+#. module: crm_callcenter
+#: code:addons/crm_callcenter/crm_phonecall.py:292
+#, python-format
+msgid "It's only possible to convert one phonecall at a time."
+msgstr ""
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Current Month"
+msgstr "Tháng này"
+
+#. module: crm_callcenter
+#: field:crm.channel,shortname:0
+msgid "Short Name"
+msgstr "Mã kênh"
+
+#. module: crm_callcenter
+#: field:crm.result.type,status:0
+msgid "Purpose Description"
+msgstr "Mô tả"
+
+#. module: crm_callcenter
+#: field:crm.phonecall,channel:0
+msgid "Channels"
+msgstr "Kênh Marketing"
+
+#. module: crm_callcenter
+#: code:addons/crm_callcenter/crm_phonecall.py:292
+#, python-format
+msgid "Warning!"
+msgstr "Cảnh báo!"
+
+#. module: crm_callcenter
+#: selection:crm.meeting,sms_status:0 selection:crm.phonecall,sms_status:0
+msgid "Confirmed"
+msgstr "Đã xác nhận"
+
+#. module: crm_callcenter
+#: model:ir.model,name:crm_callcenter.model_crm_service_type
+msgid "crm.service.type"
+msgstr ""
+
+#. module: crm_callcenter
+#: code:addons/crm_callcenter/crm_phonecall.py:221
+#, python-format
+msgid "Phone Call"
+msgstr "Cuộc gọi"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Transaction created to Me or My Team(s)"
+msgstr "Giao dịch do tôi hoặc nhóm tôi tạo"
+
+#. module: crm_callcenter
+#: field:crm.service.type,name:0
+msgid "Type Code"
+msgstr "Mã"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_result_type
+msgid "Transaction Purpose"
+msgstr "Mục đích"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0 field:crm.phonecall,service:0
+msgid "Type"
+msgstr "Lĩnh vực"
+
+#. module: crm_callcenter
+#: view:crm.channel:0 field:crm.channel,channel_name:0
+msgid "Channel"
+msgstr "Kênh Marketing"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_top
+msgid "CRM"
+msgstr ""
+
+#. module: crm_callcenter
+#: field:crm.meeting,sms_status:0 field:crm.phonecall,sms_status:0
+msgid "SMS Status"
+msgstr "Trạng thái gửi tin nhắc hẹn SMS"
+
+#. module: crm_callcenter
+#: model:res.groups,name:crm_callcenter.group_call_center_user
+msgid "Call Center User"
+msgstr ""
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_config
+msgid "Configuration"
+msgstr "Thiết lập thông số"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0 view:res.partner:0
+msgid "True"
+msgstr ""
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.phonecall_menu_config
+msgid "Categories"
+msgstr "Phân loại"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_case_phone_inbound
+msgid "Transaction"
+msgstr "Giao dịch"
+
+#. module: crm_callcenter
+#: selection:crm.smssettings,time_unit:0
+msgid "Hour(s)"
+msgstr "Giờ"
+
+#. module: crm_callcenter
+#: model:res.groups,name:crm_callcenter.group_call_center_manager
+msgid "Call Center Manager"
+msgstr ""
+
+#. module: crm_callcenter
+#: view:res.partner:0
+msgid "Profiles"
+msgstr "Hồ sơ khách hàng"
+
+#. module: crm_callcenter
+#: model:ir.model,name:crm_callcenter.model_crm_channel
+msgid "Marketing Chanel"
+msgstr "Kênh Marketing"
+
+#. module: crm_callcenter
+#: field:crm.result.type,status_code:0
+msgid "Purpose Code"
+msgstr "Mã"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.crm_callcenter_phone_outgoing0
+msgid "Scheduled Calls"
+msgstr "Lên lịch gọi điện"
+
+#. module: crm_callcenter
+#: field:crm.conduct,conduct_code:0
+msgid "Conduct Code"
+msgstr "Mã đánh giá"
+
+#. module: crm_callcenter
+#: view:res.partner:0
+msgid "Create Call"
+msgstr "Tạo cuộc gọi"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Category"
+msgstr "Phân loại"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Consultant Result Types"
+msgstr "Phân loại tư vấn"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Appointment Extra Info"
+msgstr "Thông tin thêm về lịch hẹn"
+
+#. module: crm_callcenter
+#: selection:crm.meeting,sms_status:0 selection:crm.phonecall,sms_status:0
+msgid "Reminded"
+msgstr "Đã gửi tin nhắc lịch hẹn"
+
+#. module: crm_callcenter
+#: model:ir.model,name:crm_callcenter.model_crm_meeting
+msgid "Meeting"
+msgstr "Cuộc hẹn"
+
+#. module: crm_callcenter
+#: field:crm.smssettings,reminder_before:0
+msgid "Reminder Before"
+msgstr "Nhắc lịch hen trước"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_partner_form
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_customer
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_customer_2
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_main_customers
+msgid "Customers"
+msgstr "Danh sách khách hàng"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid ""
+"Transaction created to the current user or with a team having the current "
+"user as team leader"
+msgstr ""
+
+#. module: crm_callcenter
+#: sql_constraint:crm.conduct:0
+msgid "Conduct code has to be unique !"
+msgstr "Mã đánh giá đã có"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_case_phone
+msgid "Customer Profile"
+msgstr "Hồ sơ khách hàng"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_call_service_type
+msgid "Transaction Type"
+msgstr "Lĩnh vực"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_view_appointment_action
+msgid "Appointments"
+msgstr "Lịch đặt hẹn"
+
+#. module: crm_callcenter
+#: view:crm.meeting:0
+msgid "SMS Sent"
+msgstr "Đã gửi tin nhắn"
+
+#. module: crm_callcenter
+#: view:crm.conduct:0
+msgid "Consultant Result Definition"
+msgstr "ĐỊnh nghĩa các loại tư vấn"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Appoinment - From Date"
+msgstr "Lịch hẹn - Từ"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Appoinment Current Month"
+msgstr "Lịch hẹn tháng này"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_product_category
+msgid "Product/Service Categories"
+msgstr "Nhóm dịch vụ"
+
+#. module: crm_callcenter
+#: field:crm.phonecall,has_meeting:0
+msgid "Show meeting info ?"
+msgstr "Xem thêm thông tin lịch đặt hẹn ?"
+
+#. module: crm_callcenter
+#: field:crm.meeting,brief:0 field:crm.phonecall,brief:0
+msgid "Meeting Brief"
+msgstr "Nội dung nhắc cuộc hẹn (gửi SMS)"
+
+#. module: crm_callcenter
+#: view:res.partner:0
+msgid "City"
+msgstr "Thành phố / Tỉnh"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_products
+msgid "Products/Services"
+msgstr "Dịch vụ"
+
+#. module: crm_callcenter
+#: view:crm.result.type:0
+msgid "Transaction Purpose Definition"
+msgstr "Định nghĩa mục đích liên hệ"
+
+#. module: crm_callcenter
+#: view:crm.channel:0
+msgid "List of Channel"
+msgstr "Danh mục các kênh"
+
+#. module: crm_callcenter
+#: view:crm.meeting:0
+msgid "Responsible"
+msgstr "Nhân viên"
+
+#. module: crm_callcenter
+#: model:ir.model,name:crm_callcenter.model_crm_phonecall
+msgid "Phonecall"
+msgstr "Cuôc gọi"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Current Date"
+msgstr "Ngày hôm nay"
+
+#. module: crm_callcenter
+#: selection:crm.smssettings,time_unit:0
+msgid "Day(s)"
+msgstr "Ngày"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0 field:crm.service.type,description:0
+msgid "Description"
+msgstr "Mô tả chi tiết"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Appoinment Current Year"
+msgstr "Lịch hẹn năm nay"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Marketing Channels"
+msgstr "Kênh Marketing"
+
+#. module: crm_callcenter
+#: view:crm.meeting:0
+msgid "Search Meetings"
+msgstr "Tìm kiếm lịch hẹn"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0 field:crm.phonecall,result_status:0
+#: model:ir.ui.menu,name:crm_callcenter.result_type_menu_config
+msgid "Purpose"
+msgstr "Mục đích"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.crm_meeting_callcenter
+msgid "Scheduled Meetings"
+msgstr "Cuộc hẹn đã lên lịch"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.menu_callcenter_appoinment
+msgid "Appoinment"
+msgstr "Lịch đặt hẹn"
+
+#. module: crm_callcenter
+#: model:ir.ui.menu,name:crm_callcenter.channel_menu_config
+msgid "Marketing Channel"
+msgstr "Kênh Marketing"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,name:crm_callcenter.action_new_appointment
+#: view:res.partner:0
+msgid "Create Appointment"
+msgstr "Tạo lịch hẹn"
+
+#. module: crm_callcenter
+#: model:ir.model,name:crm_callcenter.model_crm_result_type
+msgid "crm.result.type"
+msgstr ""
+
+#. module: crm_callcenter
+#: view:crm.conduct:0
+msgid "Conducted Result Definition"
+msgstr "Định nghĩa mục đánh giá"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Create - From Date"
+msgstr "Ngày tạo - Từ"
+
+#. module: crm_callcenter
+#: view:crm.phonecall:0
+msgid "Current Year"
+msgstr "Năm nay"
+
+#. module: crm_callcenter
+#: view:crm.service.type:0
+msgid "Phonecall Result"
+msgstr "Kết quả cuộc gọi"
+
+#. module: crm_callcenter
+#: field:crm.meeting,staffs:0 field:crm.phonecall,staffs:0
+msgid "Doctor/Staff"
+msgstr "NV / BS tư vấn, thực hiện"
+
+#. module: crm_callcenter
+#: model:ir.actions.act_window,help:crm_callcenter.crm_callcenter_phone_outgoing0
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"            Click to schedule a call\n"
+"          </p><p>\n"
+"            OpenERP allows you to easily define all the calls to be done\n"
+"            by your sales team and follow up based on their summary.\n"
+"          </p><p>\n"
+"            You can use the import feature to massively import a new list "
+"of\n"
+"            prospects to qualify.\n"
+"          </p>\n"
+"        "
+msgstr ""

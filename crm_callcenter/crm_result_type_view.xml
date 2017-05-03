@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="result_type_form">
+        <field name="name">Transaction Purpose Form</field>
+        <field name="model">crm.result.type</field>
+        <field name="arch" type="xml">
+            <form string="Consultant Result Definition" version="7.0">
+				<group col="4">  
+					<field name="status_code"/>
+					<field name="status"/>
+				</group>
+            </form>
+        </field>
+    </record>
+	
+	<record model="ir.ui.view" id="result_type_tree">
+		<field name="name">Transaction Purpose Definition Tree</field>
+		<field name="model">crm.result.type</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Transaction Purpose Definition">
+				<field name="status_code"/>
+				<field name="status"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_result_type">
+      <field name="name">Transaction Purpose</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.result.type</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="result_type_tree"/>
+    </record>
+	
+	<record model="ir.ui.view" id="request_type_form">
+        <field name="name">Request Type Form</field>
+        <field name="model">crm.request.type</field>
+        <field name="arch" type="xml">
+            <form string="Request Type" version="7.0">
+				<group col="4">  
+					<field name="code"/>
+					<field name="name"/>
+				</group>
+            </form>
+        </field>
+    </record>
+	
+	<record model="ir.ui.view" id="request_type_tree">
+		<field name="name">Request Type Tree</field>
+		<field name="model">crm.request.type</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Request Type">
+				<field name="code"/>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_request_type">
+      <field name="name">Yêu cầu</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.request.type</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="request_type_tree"/>
+    </record>
+	
+	<menuitem id="request_menu_config" name="Yêu cầu" parent="menu_callcenter_config" action="action_request_type"  sequence="21" groups="group_call_center_manager" />
+</data>
+</openerp>

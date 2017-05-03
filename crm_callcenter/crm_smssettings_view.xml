@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="crm_callcenter_smssettings_form">
+		<field name="name">SMS Reminder Settings</field>
+		<field name="model">crm.smssettings</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="SMS Reminder Settings" version="7.0">
+				<header>
+						<button class="oe_highlight" name="send_sms_reminder" string="Run SMS Reminder" type="object"  />
+				</header>
+				<sheet>
+					<group col="4">
+						<field name="reminder_before" />
+						<field name="time_unit" />
+						<field name="remider_time" widget="float_time" attrs="{'invisible':[('time_unit','!=','inday')]}"/>
+					</group>
+					<group col="2">
+						<field name="reminder_message" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="crm_callcenter_smssettings_tree">
+		<field name="name">SMS Reminder Settings</field>
+		<field name="model">crm.smssettings</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="SMS Reminder Settings">
+				<field name="reminder_before" />
+				<field name="time_unit" />
+				<field name="reminder_message" />
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_sms_settings">
+      <field name="name">SMS Reminder Settings</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.smssettings</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="crm_callcenter_smssettings_tree"/>
+    </record>
+</data>
+</openerp>

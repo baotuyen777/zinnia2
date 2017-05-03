@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="channel_form">
+		<field name="name">Channel_Form_View</field>
+		<field name="model">crm.channel</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Channel">
+				<group col="4">     
+					<field name="shortname" />
+					<field name="channel_name" />
+				</group>
+			</form>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="channel_tree">
+		<field name="name">Channel_Tree_View</field>
+		<field name="model">crm.channel</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="List of Channel">
+				<field name="shortname"/>
+				<field name="channel_name"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- Group Defined -->
+	<record model="res.groups" id="group_call_center_user">
+            <field name="name">Call Center User</field>
+    </record>
+	<record model="res.groups" id="group_call_center_manager">
+            <field name="name">Call Center Manager</field>
+    </record>
+	<record model="res.groups" id="group_receptionist">
+            <field name="name">Receptionists</field>
+    </record>
+	<record model="res.groups" id="group_receptionist_manager">
+            <field name="name">Receptionists Manager</field>
+    </record>
+	
+	<!-- End Group -->
+	
+	<!-- Action -->
+	<record model="ir.actions.act_window" id="action_crm_channel">
+      <field name="name">Channel Informations</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">crm.channel</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="channel_tree"/>
+    </record>
+	
+	
+</data>
+</openerp>
