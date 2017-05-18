@@ -1,0 +1,80 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="apm_tree_view">
+            <field name="name">List appointment</field>
+            <field name="model">crm.apm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="description"/>
+                    <field name="contact_id"/>
+                    <field name="phone"/>
+                    <field name="service_type_id"/>
+
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="apm_form_view">
+            <field name="name">Form Appointment</field>
+            <field name="model">crm.apm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="description"/>
+                                <field name="phone"/>
+                                <field name="date"/>
+                                <field name="duration"/>
+                                <field name="purpose_id" widget="selection"/>
+                                <field name="service_type_id" widget="selection"/>
+                                <field name="contact_id" widget="selection"/>
+                                <field name="conduct_id" widget="selection"/>
+                                <field name="product_id" widget="selection"/>
+
+                            </group>
+                            <group>
+                                <field name="employee_id" widget="selection" domain="[('is_company','=',False)]"/>
+                                <field name="call_type_id"  widget="selection"/>
+                                <field name="agency_id" widget="selection"/>
+                                <field name="maketing_channel_id" widget="selection"/>
+                                <field name="phone_number"/>
+                                <field name="branch_id" widget="selection"/>
+                                <field name="request_id" widget="selection"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+
+                    <notebook>
+                        <page string="Description detail">
+                            <field name="description_detail"/>
+                        </page>
+                        <page string="History">
+                            <field name="history_id" >
+                                <tree editable="bottom">
+                                    <field name="date_create"/>
+                                    <field name="created_by" />
+                                    <field name="content"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="apm_list_action">
+            <field name="name">Appointment</field>
+            <field name="res_model">crm.apm</field>
+            <!--<field name="domain">[('rate','=','success')]</field>-->
+        </record>
+        <record model="ir.actions.act_window" id="deal_list_action">
+            <field name="name">Deal</field>
+            <field name="res_model">crm.apm</field>
+            <!--<field name="domain">[('rate','=','success')]</field>-->
+        </record>
+        <menuitem id="deal_list_menu" action="deal_list_action" parent="menu_heading_profile"/>
+        <menuitem id="appointment_list_menu" action="apm_list_action" parent="menu_heading_profile"/>
+    </data>
+</odoo>

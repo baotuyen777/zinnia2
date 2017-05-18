@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="lps_list_action">
+            <field name="name">Landing page source</field>
+            <field name="res_model">crm.lps</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first landing page source
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="lps_form_view">
+            <field name="name">Landing page source</field>
+            <field name="model">crm.lps</field>
+            <field name="arch" type="xml">
+                <form string="Landing Page Source Form">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="total"/>
+                    </group>
+
+                </form>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="lps_tree_view">
+            <field name="name">Landing page source list</field>
+            <field name="model">crm.lps</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree,form</field>
+            <field name="arch" type="xml">
+                <tree name="Landing page source list">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="total" string="Number of partners "/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="lps_menu" name="Landing page source" parent="menu_heading_config_param"
+                  action="lps_list_action"/>
+
+    </data>
+</odoo>

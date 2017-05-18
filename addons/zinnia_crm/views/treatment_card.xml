@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="treatment_card_action">
+            <field name="name">Card</field>
+            <field name="res_model">treatment.card</field>
+        </record>
+        <record model="ir.ui.view" id="treatment_card_tree">
+            <field name="name">Card</field>
+            <field name="model">treatment.card</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="treatment_id"/>
+                </tree>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="treatment_card_form">
+            <field name="name">Card</field>
+            <field name="model">treatment.card</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_draft" type="object" string="Draft"
+                                states="returned"/>
+                        <button name="action_gave" type="object" string="Gave to customer"
+                                states="draft" class="oe_highlight"/>
+                        <button name="action_returned" type="object" string="Returned"
+                                states="gave" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group> <h1><field name="name" placeholder="Code card"/></h1></group>
+                        <group>
+                            <group>
+                                <field name="partner_id" domain="[('is_company','=',False)]"></field>
+                                <field name="value"/>
+                                <field name="use_value"/>
+                                <field name="residual_value"/>
+                                <field name="amount_debit"/>
+                                <field name="order_id"/>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="treatment_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="time"/>
+                                <field name="residual_time"/>
+                                <field name="sale_off"/>
+                                <field name="card_form"/>
+                            </group>
+                        </group>
+
+
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+        <menuitem id="menu_treatment_card" action="treatment_card_action" parent="menu_heading_treatment"/>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="sms_action">
+            <field name="name">SMS</field>
+            <field name="res_model">crm.sms</field>
+        </record>
+        <record model="ir.ui.view" id="sms_tree">
+            <field name="name">SMS</field>
+            <field name="model">crm.sms</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="phone"/>
+                    <field name="content"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="sms_form">
+            <field name="name">SMS</field>
+            <field name="model">crm.sms</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_sms" parent="menu_heading_profile" action="sms_action"/>
+    </data>
+</odoo>

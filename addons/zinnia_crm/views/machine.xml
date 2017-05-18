@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="machine_list_action">
+            <field name="name">Machine</field>
+            <field name="res_model">crm.machine</field>
+        </record>
+
+        <record model="ir.ui.view" id="machine_tree_view">
+            <field name="name">Machine</field>
+            <field name="model">crm.machine</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem name="Machine" id="menu_machine" action="machine_list_action" parent="menu_heading_treatment"/>
+
+    </data>
+</odoo>
