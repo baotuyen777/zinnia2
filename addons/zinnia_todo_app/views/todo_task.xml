@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record	id="view_form_todo_task_inherited"	model="ir.ui.view">
+            <field	name="name">Todo	Task	form	–	User	extension</field>
+            <field	name="model">todo.task</field>
+            <field	name="inherit_id"	ref="zinnia_todo_app.view_form_todo_task"/>
+            <field name="arch" type="xml">
+                <field name="active" position="attributes">
+                    <!--<attribute name="invisible">-->
+                    <!--<attribute/>-->
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

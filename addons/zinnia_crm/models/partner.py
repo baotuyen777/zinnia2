@@ -45,6 +45,16 @@ class Partner(models.Model):
         ('facebook','Facebook')
     ])
 
+    # @api.multi
+    # def name_get(self):
+    #     result = []
+    #     for record in self:
+    #         result.append(
+    #             (record.id,
+    #              u"%s (%s)" % (record.name, '11111')
+    #              ))
+    #     return result
+
     @api.multi
     def appointment_form(self):
         return {

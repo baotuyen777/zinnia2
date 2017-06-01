@@ -1,0 +1,20 @@
+<odoo>
+  <data>
+
+
+    <!-- Top menu item -->
+    <menuitem name="Todo task" id="topmenu_todotask"/>
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="zinnia_todo_app.menu_1" parent="zinnia_todo_app.menu_root"/>
+    <menuitem name="Menu 2" id="zinnia_todo_app.menu_2" parent="zinnia_todo_app.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="zinnia_todo_app.menu_1_list" parent="zinnia_todo_app.menu_1"
+              action="zinnia_todo_app.action_window"/>
+    <menuitem name="Server to list" id="zinnia_todo_app" parent="zinnia_todo_app.menu_2"
+              action="zinnia_todo_app.action_server"/>
+    -->
+  </data>
+</odoo>

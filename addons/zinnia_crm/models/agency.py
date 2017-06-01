@@ -10,3 +10,14 @@ class Agency(models.Model):
     email=fields.Char(string='Email')
     bank_account_number=fields.Char(string='Bank Account Number')
     bank_name=fields.Char(string='Bank Name')
+
+    # @api.multi
+    # def name_get(self):
+    #     result = []
+    #     for record in self:
+    #         result.append(
+    #             (record.id,
+    #              u"%s (%s)" % (record.name, '11111')
+    #              ))
+    #     return result
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Add instructor field to existing view -->
+        <record model="ir.ui.view" id="partner_form_view">
+            <field name="name">Partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <field name="type" position="after">
+                    <field name="authored_book_ids" widget="One2many">
+                        <tree>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                    <field name="count_books"/>
+                </field>
+
+
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="partner_list_action">
+            <field name="name">Partner</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem id="partner_menu" name="List partner" parent="menu_heading_partner" action="partner_list_action"/>
+    </data>
+</odoo>

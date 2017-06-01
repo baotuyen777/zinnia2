@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <template id="assets_backend"
+                  inherit_id="web.assets_backend"
+                  name="Todo	Kanban	Assets">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/zinnia_crm/static/src/css/tuyenbv.css"/>
+            </xpath>
+        </template>
         <!-- Add instructor field to existing view -->
         <record model="ir.ui.view" id="partner_form_view">
             <field name="name">Partner</field>
@@ -39,29 +46,29 @@
             </field>
         </record>
         <!--<record model="ir.actions.act_window" id="kanban_list_action">-->
-            <!--<field name="name">crm.partner.kanban</field>-->
-            <!--<field name="res_model">res.partner</field>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<kanban>-->
-                    <!--<field name="name"/>-->
-                    <!--<field name="phone"/>-->
+        <!--<field name="name">crm.partner.kanban</field>-->
+        <!--<field name="res_model">res.partner</field>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<kanban>-->
+        <!--<field name="name"/>-->
+        <!--<field name="phone"/>-->
 
-                <!--</kanban>-->
-            <!--</field>-->
+        <!--</kanban>-->
+        <!--</field>-->
         <!--</record>-->
 
-         <!--<record model="ir.actions.act_window" id="partner_tree">-->
-            <!--<field name="name">crm.partner.tree</field>-->
-            <!--<field name="res_model">res.partner</field>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<tree>-->
-                    <!--<field name="name"/>-->
-                    <!--<field name="birth"/>-->
-                    <!--<field name="gender"/>-->
-                    <!--<field name="phone"/>-->
-                    <!--<field name="email"/>-->
-                <!--</tree>-->
-            <!--</field>-->
+        <!--<record model="ir.actions.act_window" id="partner_tree">-->
+        <!--<field name="name">crm.partner.tree</field>-->
+        <!--<field name="res_model">res.partner</field>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<tree>-->
+        <!--<field name="name"/>-->
+        <!--<field name="birth"/>-->
+        <!--<field name="gender"/>-->
+        <!--<field name="phone"/>-->
+        <!--<field name="email"/>-->
+        <!--</tree>-->
+        <!--</field>-->
         <!--</record>-->
 
         <record model="ir.actions.act_window" id="partner_list_action">

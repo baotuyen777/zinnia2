@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+           <!-- top level menu: no parent -->
+        <menuitem id="book_main_menu" name="Book"/>
+        <!-- Heading left side menu -->
+        <menuitem id="menu_heading_book" name="Book" parent="book_main_menu" sequence="1"/>
+        <menuitem id="menu_heading_partner" name="Partner" parent="book_main_menu"/>
+    </data>
+</odoo>

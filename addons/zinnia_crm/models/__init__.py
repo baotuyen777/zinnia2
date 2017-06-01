@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import models
+# from . import models
 from . import partner
 from . import landing_page_source
 from . import request

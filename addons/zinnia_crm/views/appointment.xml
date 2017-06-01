@@ -35,7 +35,7 @@
                             </group>
                             <group>
                                 <field name="employee_id" widget="selection" domain="[('is_company','=',False)]"/>
-                                <field name="call_type_id"  widget="selection"/>
+                                <field name="call_type_id" widget="selection"/>
                                 <field name="agency_id" widget="selection"/>
                                 <field name="maketing_channel_id" widget="selection"/>
                                 <field name="phone_number"/>
@@ -51,10 +51,10 @@
                             <field name="description_detail"/>
                         </page>
                         <page string="History">
-                            <field name="history_id" >
+                            <field name="history_id">
                                 <tree editable="bottom">
                                     <field name="date_create"/>
-                                    <field name="created_by" />
+                                    <field name="created_by"/>
                                     <field name="content"/>
                                 </tree>
                             </field>
@@ -76,5 +76,37 @@
         </record>
         <menuitem id="deal_list_menu" action="deal_list_action" parent="menu_heading_profile"/>
         <menuitem id="appointment_list_menu" action="apm_list_action" parent="menu_heading_profile"/>
+
+
+        <report id="account_invoices"
+                model="crm.apm"
+                string="Appointment"
+                report_type="qweb-html"
+                name="zinnia_crm.report_apm"
+                file="apmaaa"
+                attachment_use="True"
+                attachment="(object.description in ('open','paid')) and
+        ('INV'+(object.phone or '').replace('/','')+'.pdf')"
+                menu='True'
+        />
+        <template id="report_apm">
+            <t t-call="report.html_container">
+                <table class="table">
+                    <thead>
+                        <th>Description</th>
+                        <th>Phone</th>
+                    </thead>
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="report.external_layout">
+                           <tr>
+                               <td><span t-field="o.description"/></td>
+                               <td><span t-field="o.phone"/></td>
+                           </tr>
+                        </t>
+                    </t>
+                </table>
+            </t>
+        </template>
+
     </data>
 </odoo>
